@@ -1,0 +1,9 @@
+spring:
+  server:
+    port: 8081
+---
+
+spring:
+  kafka:
+    producer:
+      enable-auto-commit: true
