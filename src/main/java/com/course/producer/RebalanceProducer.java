@@ -2,10 +2,8 @@ package com.course.producer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public class RebalanceProducer {
 
     @Autowired
@@ -13,7 +11,7 @@ public class RebalanceProducer {
 
     private int i = 0;
 
-    @Scheduled(fixedRate = 1000)
+//    @Scheduled(fixedRate = 1000)
     public void sendMessage() {
         i++;
         kafkaTemplate.send("t_rebalance", "Counter is "+ i);
