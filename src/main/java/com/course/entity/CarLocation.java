@@ -38,4 +38,13 @@ public class CarLocation {
     public void setDistance(int distance) {
         this.distance = distance;
     }
+
+    @Override
+    public String toString() {
+        return "CarLocation{" +
+                "carId='" + carId + '\'' +
+                ", timestamp=" + timestamp +
+                ", distance=" + distance +
+                '}';
+    }
 }
