@@ -1,7 +1,9 @@
 package com.course;
 
 import com.course.entity.FoodOrder;
+import com.course.entity.SimpleNumber;
 import com.course.producer.FoodOrderProducer;
+import com.course.producer.SimpleNumberProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +20,8 @@ public class KafkaProducerApplication implements CommandLineRunner {
 
 	@Autowired
 	private FoodOrderProducer foodOrderProducer22;
+    @Autowired
+	private SimpleNumberProducer simpleNumberProducer22;
 
 
 	@Override
@@ -27,10 +31,14 @@ public class KafkaProducerApplication implements CommandLineRunner {
 		var fishOrder = new FoodOrder(10, "Fish");
 		var pizzaOrder = new FoodOrder(5, "pizza");
 
-		foodOrderProducer22.send(chickenOrder);
-		foodOrderProducer22.send(fishOrder);
-		foodOrderProducer22.send(pizzaOrder);
+		foodOrderProducer22.send22(chickenOrder);
+		foodOrderProducer22.send22(fishOrder);
+		foodOrderProducer22.send22(pizzaOrder);
 
+		for( int i =0; i< 103; i++) {
+			var simpleNumber  = new SimpleNumber(i);
+			simpleNumberProducer22.send22(simpleNumber);
+		}
 
 	}
 }
