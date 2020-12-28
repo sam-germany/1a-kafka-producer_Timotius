@@ -1,9 +1,7 @@
 package com.course;
 
-import com.course.entity.FoodOrder;
-import com.course.entity.SimpleNumber;
-import com.course.producer.FoodOrderProducer;
-import com.course.producer.SimpleNumberProducer;
+import com.course.producer.InvoiceProducer;
+import com.course.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,27 +15,20 @@ public class KafkaProducerApplication implements CommandLineRunner {
 		SpringApplication.run(KafkaProducerApplication.class, args);
 	}
 
-
-	@Autowired
-	private FoodOrderProducer foodOrderProducer22;
-    @Autowired
-	private SimpleNumberProducer simpleNumberProducer22;
+     @Autowired
+	 private InvoiceService invoiceService22;
+	 @Autowired
+	 private InvoiceProducer invoiceProducer22;
 
 
 	@Override
 	public void run(String... args) throws Exception {
+       for(int i=0;i<10; i++){
+       	var invoice  = invoiceService22.generateInvoice();
 
-		var chickenOrder = new FoodOrder(2, "Chicken");
-		var fishOrder = new FoodOrder(10, "Fish");
-		var pizzaOrder = new FoodOrder(5, "pizza");
+       	if(i >=5){ invoice .setAmount(-1);  }
 
-		foodOrderProducer22.send22(chickenOrder);
-		foodOrderProducer22.send22(fishOrder);
-		foodOrderProducer22.send22(pizzaOrder);
-
-		for( int i =0; i< 103; i++) {
-			var simpleNumber  = new SimpleNumber(i);
-			simpleNumberProducer22.send22(simpleNumber);
+       	invoiceProducer22.send22(invoice);
 		}
 
 	}
